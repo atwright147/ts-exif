@@ -1,0 +1,4 @@
+--require=ts-node/register
+--require=chai/register-expect
+--require=sinon-register
+--require=./test/setup.js

@@ -1,0 +1,25 @@
+{
+  "name": "exif-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "start": "ts-node ./src/demo.ts",
+    "test": "mocha './src/**/*.spec.ts' --opts ./mocha.opts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.2.3",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.7",
+    "@types/sinon": "^7.0.13",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "sinon": "^7.5.0",
+    "sinon-register": "^1.0.1",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  }
+}
