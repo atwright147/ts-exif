@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { getExif } from './index';
+import { isValidFileType, findExif } from './index';
 
 const SIZE = 131072;  // 128kb
 
@@ -15,7 +15,8 @@ fs.read(fd, buf, 0, SIZE, 0, (err) => {
     }
 });
 
-// // https://stackoverflow.com/a/12101012/633056
+// https://stackoverflow.com/a/12101012/633056
 const dataView = new DataView(buf.buffer);
 
-console.info(getExif(dataView));
+console.info(isValidFileType(dataView));
+console.info(findExif(dataView));
