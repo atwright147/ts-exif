@@ -53,6 +53,6 @@ export const findExif = (dataView: DataView) => {
     }
   }
 
-  // msybe should throw?
+  // maybe should throw?
   return false;
 }
