@@ -9,10 +9,10 @@ const buf = Buffer.alloc(SIZE);
 
 const fd = fs.openSync(path.join('images', 'IMG_7413.jpg'), 'r');
 fs.read(fd, buf, 0, SIZE, 0, (err) => {
-    if (err) {
-        console.info(err);
-        return;
-    }
+  if (err) {
+    console.info(err);
+    return;
+  }
 });
 
 // https://stackoverflow.com/a/12101012/633056

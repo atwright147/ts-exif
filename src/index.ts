@@ -1,10 +1,6 @@
 const debug = true;
 
-export const getExif = (dataView: DataView) => {
-  return isValidFileType(dataView);
-}
-
-export const isValidFileType = (dataView: DataView) => {
+export const isValidFileType = (dataView: DataView): boolean => {
   if (dataView.getUint8(0) === 0xFF || dataView.getUint8(1) === 0xD8) {
     console.info('Valid JPEG');
     return true;
@@ -25,7 +21,7 @@ export const isValidFileType = (dataView: DataView) => {
   return false;
 }
 
-export const findExif = (dataView: DataView) => {
+export const findExif = (dataView: DataView): number | false => {
   if (debug) console.log("Got file of length " + dataView.byteLength);
   if ((dataView.getUint8(0) !== 0xFF) || (dataView.getUint8(1) != 0xD8)) {
     if (debug) console.log("Not a valid JPEG");
@@ -55,4 +51,8 @@ export const findExif = (dataView: DataView) => {
 
   // maybe should throw?
   return false;
+}
+
+export const getExif = (dataView: DataView): boolean => {
+  return isValidFileType(dataView);
 }
