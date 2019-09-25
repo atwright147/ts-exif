@@ -3,7 +3,7 @@ import path from 'path';
 
 import { isValidFileType, findExif } from './index';
 
-const SIZE = 131072;  // 128kb
+const SIZE = 1024 * 128;  // 128kb
 
 const buf = Buffer.alloc(SIZE);
 

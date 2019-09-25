@@ -1,5 +1,4 @@
 const debug = true;
-let offset = 2;
 
 export const getExif = (dataView: DataView) => {
   return isValidFileType(dataView);
@@ -34,6 +33,7 @@ export const findExif = (dataView: DataView) => {
   }
 
   const length = dataView.byteLength;
+  let offset = 2;
   let marker: number;
 
   while (offset < length) {
@@ -46,11 +46,13 @@ export const findExif = (dataView: DataView) => {
 
     if (marker == 225) {
       if (debug) console.log("Found 0xFFE1 marker");
-      return;
+      return offset;
       // return readEXIFData(dataView, offset + 4, dataView.getUint16(offset + 2) - 2);
     } else {
       offset += 2 + dataView.getUint16(offset + 2);
     }
-
   }
+
+  // msybe should throw?
+  return false;
 }
