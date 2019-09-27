@@ -3,7 +3,7 @@ import { Tags, TiffTags, GpsTags, Ifd1Tags, IptcFields, StringValues } from './e
 const debug = true;
 
 export const isValidFileType = (dataView: DataView): boolean => {
-  if (dataView.getUint8(0) === 0xFF || dataView.getUint8(1) === 0xD8) {
+  if (dataView.getUint8(0) == 0xFF || dataView.getUint8(1) == 0xD8) {
     console.info('Valid JPEG');
     return true;
   } else {
