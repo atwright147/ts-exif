@@ -7,7 +7,7 @@ const SIZE = 1024 * 128;  // 128kb
 
 const buf = Buffer.alloc(SIZE);
 
-const fd = fs.openSync(path.join('images', 'IMG_7413.jpg'), 'r');
+const fd = fs.openSync(path.join('images', 'image.jpg'), 'r');
 fs.read(fd, buf, 0, SIZE, 0, (err) => {
     if (err) {
         console.info(err);
