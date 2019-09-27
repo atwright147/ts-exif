@@ -65,6 +65,7 @@ const getString = (dataView: DataView, start: number, length: number) => {
   return outstr;
 }
 
+const readEXIFData = (dataView, start) => {
   if (getString(dataView, start, 4) != 'Exif') {
     if (debug) console.log('Not valid EXIF data! ' + getString(dataView, start, 4));
     return false;
