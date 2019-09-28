@@ -174,13 +174,13 @@ const readTags = (dataView: DataView, tiffStart: number, dirStart: number, tagSt
     entryOffset = dirStart + i * 12 + 2;
     tag = tagStrings[dataView.getUint16(entryOffset, !bigEnd)];
     if (!tag && debug) console.log('Unknown tag: ' + dataView.getUint16(entryOffset, !bigEnd));
-    tags[tag] = readTagValue(dataView, entryOffset, tiffStart, dirStart, bigEnd);
+    tags[tag] = readTagValue(dataView, entryOffset, tiffStart, bigEnd);
   }
   return tags;
 }
 
 
-const readTagValue = (dataView: DataView, entryOffset: number, tiffStart: number, dirStart: number, bigEnd: boolean) => {
+const readTagValue = (dataView: DataView, entryOffset: number, tiffStart: number, bigEnd: boolean) => {
   const type = dataView.getUint16(entryOffset + 2, !bigEnd);
   const numValues = dataView.getUint32(entryOffset + 4, !bigEnd);
   const valueOffset = dataView.getUint32(entryOffset + 8, !bigEnd) + tiffStart;
@@ -195,7 +195,7 @@ const readTagValue = (dataView: DataView, entryOffset: number, tiffStart: number
     case 1: // byte, 8-bit unsigned int
     case 7: // undefined, 8-bit byte, value depending on field
       if (numValues == 1) {
-        return dataView.getUint8(entryOffset + 8, !bigEnd);
+        return dataView.getUint8(entryOffset + 8);
       } else {
         offset = numValues > 4 ? valueOffset : (entryOffset + 8);
         vals = [];
