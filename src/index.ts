@@ -65,7 +65,7 @@ const getString = (dataView: DataView, start: number, length: number) => {
   return outstr;
 }
 
-const readEXIFData = (dataView, start) => {
+const readEXIFData = (dataView: DataView, start: number) => {
   if (getString(dataView, start, 4) != 'Exif') {
     if (debug) console.log('Not valid EXIF data! ' + getString(dataView, start, 4));
     return false;
@@ -163,7 +163,7 @@ const readEXIFData = (dataView, start) => {
   return tags;
 }
 
-const readTags = (dataView, tiffStart, dirStart, strings, bigEnd) => {
+const readTags = (dataView: DataView, tiffStart: number, dirStart: number, tagStrings: any, bigEnd: boolean) => {
   const entries = dataView.getUint16(dirStart, !bigEnd);
   const tags = {};
   let entryOffset;
@@ -172,7 +172,7 @@ const readTags = (dataView, tiffStart, dirStart, strings, bigEnd) => {
 
   for (i = 0; i < entries; i++) {
     entryOffset = dirStart + i * 12 + 2;
-    tag = strings[dataView.getUint16(entryOffset, !bigEnd)];
+    tag = tagStrings[dataView.getUint16(entryOffset, !bigEnd)];
     if (!tag && debug) console.log('Unknown tag: ' + dataView.getUint16(entryOffset, !bigEnd));
     tags[tag] = readTagValue(dataView, entryOffset, tiffStart, dirStart, bigEnd);
   }
@@ -180,7 +180,7 @@ const readTags = (dataView, tiffStart, dirStart, strings, bigEnd) => {
 }
 
 
-const readTagValue = (dataView, entryOffset, tiffStart, dirStart, bigEnd) => {
+const readTagValue = (dataView: DataView, entryOffset: number, tiffStart: number, dirStart: number, bigEnd: boolean) => {
   const type = dataView.getUint16(entryOffset + 2, !bigEnd);
   const numValues = dataView.getUint32(entryOffset + 4, !bigEnd);
   const valueOffset = dataView.getUint32(entryOffset + 8, !bigEnd) + tiffStart;
